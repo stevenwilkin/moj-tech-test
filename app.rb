@@ -6,8 +6,13 @@ require_relative 'lib/anagrams'
 class App < Sinatra::Base
   get '/:word' do
     content_type :json
-    {
-      params[:word] => Anagrams.for(params[:word])
-    }.to_json
+    words = params[:word].split(',')
+
+    anagrams = words.reduce({}) do |results, word|
+      results[word] = Anagrams.for(word)
+      results
+    end
+
+    anagrams.to_json
   end
 end

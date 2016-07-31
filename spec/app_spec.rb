@@ -32,5 +32,17 @@ RSpec.describe App do
 
       specify { expect(json_response[word]).to eq([]) }
     end
+
+    context 'when multiple words are requested' do
+      let(:word2) { 'paste' }
+      let(:anagrams2) { %w(pates peats septa spate tapes tepas) }
+
+      before do
+        get "/#{[word, word2].join(',')}"
+      end
+
+      specify { expect(json_response[word]).to eq(anagrams) }
+      specify { expect(json_response[word2]).to eq(anagrams2) }
+    end
   end
 end
