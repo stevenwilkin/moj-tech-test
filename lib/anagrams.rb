@@ -34,5 +34,11 @@ class Anagrams
     def bucket_for(hash)
       buckets[hash]
     end
+
+    def for(word)
+      (bucket_for(hash_for(word)) || []).reject do |entry|
+        entry == word
+      end
+    end
   end
 end

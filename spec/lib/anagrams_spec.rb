@@ -16,4 +16,18 @@ RSpec.describe Anagrams do
 
     it { is_expected.to eq(bucket) }
   end
+
+  describe '.for' do
+    let(:word) { 'crepitus' }
+    let(:anagrams) { %w(cuprites pictures piecrust) }
+    subject { Anagrams.for(word) }
+
+    it { is_expected.to eql(anagrams) }
+
+    context 'when word is unknown' do
+      let(:word) { 'sdfwehrtgegfg' }
+
+      it { is_expected.to eql([]) }
+    end
+  end
 end
